@@ -1,0 +1,152 @@
+body{
+    background-image: url("pictures/pattern.png");
+    margin: 0px auto;
+}
+
+.navigation {
+    background-color: antiquewhite;
+    display: block;
+    width: 100%;
+    height: 45px;
+    margin: 0;
+    padding: 0;
+}
+
+.navigation div{
+    margin-left: 10px;
+    float: left;
+    display: inline-block;
+    width: 12%;
+    height: 100%;
+}
+
+.navigation div a{
+    display: block;
+    background-image: url("pictures/icon.png");
+    background-size: 100% 100%;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.navigation ul{
+    float: right;
+    display: inline;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navigation ul li{
+    float: left;
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 120px;
+}
+
+.navigation ul li a{
+    margin:0;
+    display: block;
+    font-size: 17px;
+    padding: 12px 0px;
+    width: 100%;
+    cursor: pointer;
+    overflow: hidden;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    background-color: white;
+}
+
+.navigation ul li a:hover{ background-color: aqua;}
+.navigation ul li:hover ul{
+    display:block;
+}
+
+.navigation ul li ul{
+    padding: 0;
+    z-index: 100;
+    position: absolute;
+    left: 0;
+    top: 45px;
+    width: 120px;
+    display: none;
+}
+
+.navigation ul li ul li{
+    display: block;
+}
+
+.navigation ul li ul li a{
+    margin:0;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+    color: red;
+    background-color: white;
+    display: block;
+}
+
+.index_container{
+    padding:5px;
+    display: inline-block;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.first_container{
+    padding:5px;
+    display: inline-block;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.first_container div{
+    border:2px solid #dfe5d7;
+    -webkit-border-radius: 5px;
+    background-color: #cccccc;
+    position: relative;
+    padding: 20px;
+    float: left;
+    margin: 2px;
+}
+
+.welcome-h1{
+    color: whitesmoke;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.logo {
+    margin-left: 10px;
+    float: left;
+    display: block;
+}
+
+
+.logo a:link, .logo a:visited{
+    display: block;
+    background-color: navy;
+    background-image: url("pictures/icon.png");
+    background-size: 100% 100%;
+    padding: 10px;
+}
+
+.logo a:hover, .logo a:active {
+    background-color: royalblue;
+}
+
+
+.information_p{
+    font-font: "Times New Roman", Times, serif;
+    color: white;
+    display: block;
+}
+
+.information_div h2{
+    color: white;
+}

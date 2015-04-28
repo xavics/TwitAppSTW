@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div style="width: 100%; text-align: center; padding-top: 50px;">
+        <h1 class="welcome-h1">Welcome to TweetApp</h1>
+        <div class="first_container">
+            <div>
+                <span>If you are new...</span>
+                <form id="user_form" class="log-form" method="post" action="register.html" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="User" required /><br><br>
+                    <input type="password" name="password" placeholder="Password" required /><br><br>
+                    <input type="submit" name="submit" value="Sign Up" />
+                </form>
+            </div>
+            <div>
+                <span>Benvingut</span>
+                <form id="reg_form" class="log-form" method="post" action="login.html" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="User" required /><br><br>
+                    <input type="password" name="password" placeholder="Password" required /><br><br>
+                    <input type="submit" name="submit" value="Log in" />
+                </form>
+            </div>
+        </div>
+        <a class="information_p">About Us</a>
+    </div>
+{% endblock %}
