@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
+from TwitApp.views import APIUserList, APIUserDetail, APITweetList, APITweetDetail, APIFavoriteDetail, APIFavoriteList
+from rest_framework.urlpatterns import format_suffix_patterns
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -25,5 +27,14 @@ urlpatterns = patterns('',
     url(r'^twits/$','TwitApp.views.saved_twits',name='twits'),
     url(r'^favorite_user_tweets/$', 'TwitApp.views.favorite_user_twits',name='favorite_user_twits'),
     #Media
-    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.BASE_DIR+'/TwitApp'+settings.MEDIA_URL})
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.BASE_DIR+'/TwitApp'+settings.MEDIA_URL}),
+    #API Rest
+    url(r'^api/users/$',APIUserList.as_view(),name='user-list'),
+    url(r'^api/users/(?P<pk>\d+)/$',APIUserDetail.as_view(),name='user-detail'),
+    url(r'^api/tweets/$',APITweetList.as_view(),name='tweet-list'),
+    url(r'^api/tweets/(?P<pk>\d+)/$',APITweetDetail.as_view(),name='tweet-detail'),
+    url(r'^api/favorites/$',APIFavoriteList.as_view(),name='favorite-list'),
+    url(r'^api/favorites/(?P<pk>\d+)/$',APIFavoriteDetail.as_view(),name='favorite-detail')
 )
+
+urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json','html','xml','api'])

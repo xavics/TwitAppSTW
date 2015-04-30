@@ -1,5 +1,6 @@
 body{
-    background-image: url("pictures/pattern.png");
+    background-color: RGB(32,32,32);
+    /*background-image: url("pictures/pattern.png");*/
     margin: 0px auto;
 }
 
