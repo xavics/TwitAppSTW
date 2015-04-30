@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+     <div id="buttons" class="user-buttons">
+        <span id="spana">
+            <ul>
+                <li><a id="save" onclick="submitform()" >Save changes</a></li>
+                <li><a id="cancel" onclick="loaduser()" >Cancel</a></li>
+            </ul>
+        </span>
+     </div>
+    <form id="infoform" action="" method="post">
+    {% if user.first_name %}
+        <span id="firstname"><input name="first_name" type="text" placeholder="{{ user.first_name }}" /></span>
+    {% else %}
+        <span id="firstname"><input name="first_name" type="text" placeholder="First name" /></span>
+    {% endif %}
+    {% if user.last_name %}
+        <span id="lastname"><input name="last_name" type="text" placeholder="{{ user.last_name }}" /></span>
+    {% else %}
+        <span id="lastname"><input name="last_name" type="text" placeholder="Last name" /></span>
+    {% endif %}
+    {% if user.email %}
+        <span id="email"><input name="email" type="text" placeholder="{{ user.email }}" /></span>
+    {% else %}
+        <span id="email"><input name="email" type="text" placeholder="email" /></span>
+    {% endif %}
+    {% if user_info.twitter_id %}
+        <span id="twitterid"><input name="twitter_id" type="text" placeholder="{{ user_info.twitter_id }}" /></span>
+    {% else %}
+        <span id="twitterid"><input name="twitter_id" type="text" placeholder="twitterid" /></span>
+    {% endif %}
+    {% if user_info.website %}
+        <span id="website"><input name="website" type="text" placeholder="{{ user_info.website }}" /></span>
+    {% else %}
+        <span id="website"><input name="website" type="text" placeholder="website" /></span>
+    {% endif %}
+        <span id="country"><input name="country" type="text" placeholder="Country" /></span>
+    </form>
+{% endblock %}

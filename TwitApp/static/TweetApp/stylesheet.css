@@ -150,3 +150,374 @@ body{
 .information_div h2{
     color: white;
 }
+
+
+.index_container{
+    padding:5px;
+    display: inline-block;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.first_container{
+    padding:5px;
+    display: inline-block;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.first_container div{
+    border:2px solid #dfe5d7;
+    -webkit-border-radius: 5px;
+    background-color: #cccccc;
+    position: relative;
+    padding: 20px;
+    float: left;
+    margin: 2px;
+}
+
+.welcome-h1{
+    color: whitesmoke;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.logo {
+    margin-left: 10px;
+    float: left;
+    display: block;
+}
+
+
+.logo a:link, .logo a:visited{
+    display: block;
+    background-color: navy;
+    background-image: url("pictures/dregonTweetApp.png");
+    background-size: 100% 100%;
+    padding: 10px;
+}
+
+.logo a:hover, .logo a:active {
+    background-color: royalblue;
+}
+
+.log-form input[type=text], .log-form input[type=password] {
+    padding:5px;
+    border:2px solid #ccc;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+.log-form input[type=text]:focus, .log-form input[type=password]:focus {border-color:#333; }
+
+.log-form input[type=submit] {
+    padding:5px 15px;
+    background: aquamarine;
+    border:0 none;
+    position: relative;
+    width: 75%;
+    height: 50%;
+}
+
+.content {
+    position: relative;
+    width: 100%;
+}
+
+.left-twit-display {
+    position: relative;
+    width: 20%;
+    float: left;
+}
+
+.trendy-topic-display {
+    margin: 2%;
+    background-color: lightsteelblue;
+    border:2px solid navy;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.trendy-topic-display h1{
+    color: blue;
+    font-size: medium;
+    font-weight: bold;
+    text-align: center;
+}
+
+.trendy-topic-display ul{
+    padding: 0;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+.trendy-topic-display a:link {
+    color:blueviolet;
+}
+
+.trendy-topic-display a:active {
+    color:aliceblue;
+}
+
+.center-twit-display {
+    /*padding: 5px;*/
+    width: 60%;
+    position: relative;
+    float: left;
+}
+
+.right-twit-display {
+    width: 20%;
+    position: relative;
+    float: left;
+}
+
+.right-twit-display-filters {
+    margin: 2%;
+    background-color: lightsteelblue;
+    border:2px solid navy;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.right-twit-display-filters h1{
+    color: blue;
+    margin-bottom: 0%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial;
+}
+.center-twit-display .twits-manage{
+    border:2px solid steelblue;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px 8px  0px 0px;
+    background-color: cadetblue;
+    width: 100%;
+    overflow: hidden;
+}
+
+.center-twit-display .twits-manage h1{
+    margin: 0;
+    padding: 0;
+}
+
+.center-twit-display .twits-manage span input{
+    border:2px solid lightskyblue;
+    background-color: lightblue;
+    padding:5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.center-twit-display .twits-manage span ul{
+    list-style-type: none;
+    padding: 0;
+    width: 60%;
+    height: 50px;
+}
+
+.center-twit-display .twits-manage span ul li{
+    display: inline;
+    width: 33%;
+    height: 100%;
+    float: left;
+}
+
+.center-twit-display .twits-manage ul li a:link, a:visited {
+    display: block;
+    font-width: bold;
+    color: white;
+    background-color: cadetblue;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    text-decoration: None;
+    line-height: 300%;
+}
+
+.center-twit-display .twits-manage ul li a:hover, a:active {
+    background-color: aquamarine;
+}
+
+.center-twit-display form{
+    display: inline-block;
+    position: relative;
+    top: 0%;
+    left: 12%;
+    margin-right: -50%;
+}
+
+.special-input {
+    padding: 2px 15px;
+    background: deepskyblue;
+    border: 0 none;
+    position: relative;
+    cursor: pointer;
+}
+
+.center-twit-display .show-tweets{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.center-twit-display .show-tweets li{
+    border-bottom: 1px solid steelblue;
+    border-top: 1px solid steelblue;
+    border-left: 2px solid steelblue;
+    border-right: 2px solid steelblue;
+    background-color: lightsteelblue;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+}
+
+.center-twit-display ul li h1{
+    color: blue;
+    margin-bottom: 0%;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial;
+}
+.center-twit-display ul li h2{
+    color: grey;
+    margin-top: 0%;
+    text-align: left;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.center-twit-display ul li h3{
+    color: black;
+    text-align: left;
+    font-size: 15px;
+    font-family: Arial;
+}
+
+/**/
+.squaredFour {
+	width: 20px;
+	margin: 20px auto;
+	position: relative;
+}
+
+/*User css*/
+
+.user-div {
+    float: left;
+    margin-left: 20%;
+    width: 54%;
+    position: relative;
+    display: block;
+    background-color: lightblue;
+    padding: 3% 3%;
+}
+
+.user-div img{
+    height: 150px;
+    width: 150px;
+}
+
+.user-div img:hover{
+    cursor:pointer;
+    opacity: 0.5;
+}
+
+
+.user-buttons{
+    position: relative;
+    float: right;
+    margin-right: 25px;
+    margin-top: 25px;
+    /*width: 50%;*/
+    /*overflow: hidden;*/
+}
+
+.user-buttons span{
+    display: inline-block;
+}
+
+.user-buttons span ul{
+    list-style: none;
+    display: inline;
+}
+
+.user-buttons span ul li{
+    display: inline-block;
+}
+
+.user-buttons #editprofile{
+    cursor: pointer;
+    padding:10px;
+    border:1px solid orange;
+    background-color: orange;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.user-buttons #editprofile:hover{
+    background-color: yellow;
+}
+.user-buttons #cancel{
+    cursor: pointer;
+    color: white;
+    padding:10px;
+    border:1px solid red;
+    background-color: red;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.user-buttons #cancel:hover{
+    background-color: indianred;
+}
+
+.user-buttons #save{
+    cursor: pointer;
+    padding:10px;
+    border:1px solid green;
+    background-color: green;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.user-buttons #save:hover{
+    background-color: limegreen;
+}
+
+.alert {
+    background-color: yellow;
+}
+
+.modal-container{
+    display: block;
+    position: fixed;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    top: 0;
+    right: 0;
+    bottom:0;
+    left:0;
+    z-index: 1000;
+}
+
+.modal-container .background-user-twitter-div {
+    position: absolute;
+    background-color: black;
+    opacity: 0.5;
+    height: 100%;
+    width: 100%;
+}

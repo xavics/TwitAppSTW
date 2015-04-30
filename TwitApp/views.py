@@ -1,16 +1,12 @@
 from django.shortcuts import render, get_object_or_404, render_to_response
 from models import *
-from forms import UserForm
+from forms import *
 from django.template import Context, RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-# from Twitter import *
-import logging
-import json
-import ast
-import sys
+from Twitter import *
 # API imports
 # from serializers import *
 from rest_framework import generics
@@ -78,3 +74,32 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/login.html')
 
+@login_required
+def user_profile(request, username):
+    if request.method=='POST':
+        twitter_id = request.POST.get('twitter_id')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        website = request.POST.get('website')
+        userProfile = request.user.userprofile
+        userdata = request.user
+        if first_name != "":
+            userdata.first_name = first_name
+        if last_name != "":
+            userdata.last_name = last_name
+        if email != "":
+            userdata.email = email
+        if twitter_id != "":
+            userProfile.twitter_id = twitter_id
+        if website != "":
+            userProfile.website = website
+        userProfile.save()
+        userdata.save()
+        return render(request, 'user.html', {'user_info': request.user.userprofile})
+    return render(request, 'user.html', {'user_info': User.objects.get(username=username).userprofile,
+                                         'user_form': UserProfileForm()})
+
+@login_required
+def editprofile(request):
+    return render(request,'editprofile.html',{'user_info': request.user.userprofile})
