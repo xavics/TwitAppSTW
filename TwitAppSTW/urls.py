@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-
+from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
@@ -13,5 +13,17 @@ urlpatterns = patterns('',
     url(r'^login.html','TwitApp.views.user_login',name='login'),
     url(r'^logout/$','TwitApp.views.user_logout',name='logout'),
     url(r'^user/(\w+)/$','TwitApp.views.user_profile',),
-    url(r'^edit/$','TwitApp.views.editprofile',name='edit'),
+    url(r'^edit/$', 'TwitApp.views.edit_profile',name='edit'),
+    #Tweet funcionality URL
+    url(r'^view_tweets.html','TwitApp.views.get_tweets_view',name='view_tweets'),
+    url(r'^add_favorites/$','TwitApp.views.add_favorite',name='add_favorites'),
+    url(r'^search/$','TwitApp.views.search_twits',name='search_twits'),
+    url(r'^user_twitter_view/$', 'TwitApp.views.user_twitter_view',name='search_twits'),
+    url(r'^delete_favorites/$','TwitApp.views.delete_favorite',name='delete_favorites'),
+    url(r'^save_tweet/$','TwitApp.views.save_tweet',name='save_tweet'),
+    url(r'^delete_tweet/$','TwitApp.views.delete_tweet',name='delete_tweet'),
+    url(r'^twits/$','TwitApp.views.saved_twits',name='twits'),
+    url(r'^favorite_user_tweets/$', 'TwitApp.views.favorite_user_twits',name='favorite_user_twits'),
+    #Media
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.BASE_DIR+'/TwitApp'+settings.MEDIA_URL})
 )

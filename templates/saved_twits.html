@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="left-twit-display">
+        <div class="trendy-topic-display">
+            <h1>Favorite Users</h1>
+            <input type="text" onkeyup="search(this,'a', 'favorites_list')" placeholder="favorite" />
+            {% if favorites %}
+                <ul id="favorites_list">
+                {% for favorite in favorites %}
+                    <li><a style="cursor:pointer;" data="{{ favorite }}" onclick="obtain_twits_user(this,'/favorite_user_tweets')">{{ favorite }}</a></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+    <div class="center-twit-display">
+        <div id="content-center-twit-search">
+            {% if tweets %}
+                <div class = "twits-manage">
+                    <span style="float: left; margin-left: 20px;">
+                        <input type="text" onkeyup="search(this,'h1', 'twits_list')" placeholder="Name" />
+                    </span>
+                    <span style="float: right; margin-right: 20px;">
+                        <input type="text" onkeyup="search(this,'h3', 'twits_list')" placeholder="search" />
+                    </span>
+                </div>
+                <ul id="twits_list" class="show-tweets">
+                {% for tweet in tweets %}
+                    <li class="tweet_display">
+                        <div style="">
+                            <h1 >{{ tweet.user_name }}</h1>
+                        </div>
+                        <h2>{{ tweet.screen_name }}</h2>
+                        <h3>{{ tweet.text }}</h3>
+                        {% if tweet.media %}
+                            Media Type: {{ tweet.media.type }} url: {{ tweet.media.url }}
+                        {% endif %}
+                        <a style="color:red; cursor: pointer;" tweet="{{ tweet.tweet_str_id }}" onclick="deletetweet(this,'myTwits')" > Delete Tweet</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <div>
+                    <h3 style="color: aliceblue">{{ user }}, you don't have saved tweets </h3>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

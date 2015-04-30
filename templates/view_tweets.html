@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="left-twit-display">
+        <div class="trendy-topic-display">
+            <h1>Trendy topics</h1>
+            {% if trendy_topics %}
+                <ul>
+                {% for topic in trendy_topics %}
+                    <li><a style="cursor:pointer;" data="{{ topic.query|urlencode }}" onclick="searchTrendy(this,'#loading','search_count','')">{{ topic.name }}</a></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+    <div class="center-twit-display">
+        <div style="text-align: center;">
+            <input id="search_input" type="text" name="screen_user" placeholder="User" required />
+            <a class="special-input" inputsubmit="search_input" onclick="searchTrendy(this,'#loading','search_count','radio_user')" >Search</a>
+            <img id="loading" style="display:none; height: 20px; width: 20px;" src="{{MEDIA_URL}}donut.gif" />
+        </div>
+        <div id="content-center-twit-search">
+        </div>
+    </div>
+    <div class="right-twit-display">
+        <div class="right-twit-display-filters">
+            <h1>Search options</h1>
+            <input id="radio_user" type="radio" onclick="radioSwitch('radio_anything')" checked/>User
+            <input id="radio_anything" type="radio" onclick="radioSwitch('radio_user')" />Anything
+            <input id="search_count" type="text" id="count" placeholder="Count" />
+            <h5>Count max: 80<br>Count min: 1</h5>
+        </div>
+    </div>
+{% endblock %}

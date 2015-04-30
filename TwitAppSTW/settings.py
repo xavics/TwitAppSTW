@@ -26,6 +26,8 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = 'login'
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
@@ -75,7 +77,7 @@ ROOT_URLCONF = 'TwitAppSTW.urls'
 
 WSGI_APPLICATION = 'TwitAppSTW.wsgi.application'
 
-
+AUTH_PROFILE_MODULE = 'TwitApp.UserProfile'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
@@ -102,7 +104,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-MEDIA_ROOT = '/home/cobos/PycharmProjects/twitappGit/blog/media'
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 

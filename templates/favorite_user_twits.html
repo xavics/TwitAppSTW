@@ -1,0 +1,48 @@
+<div class = "twits-manage">
+    <span style="float: right; margin-right: 15px; margin-top:10px; margin-bottom: 10px;">
+        <input type="text" onkeyup="search(this,'h3', 'twits_list')" placeholder="search" />
+    </span>
+</div>
+<div style="width: 100%; display: block;
+    border-bottom: 1px solid steelblue;
+    border-top: 1px solid steelblue;
+    border-left: 2px solid steelblue;
+    border-right: 2px solid steelblue; overflow: hidden">
+    <div style="display:block; float:left; width: 100%; height: 150px; margin:0; background-image:url('{{ infouser.profile_banner_url }}'); background-size: 100% 100%;">
+    </div>
+    <div style="background-color: #dfe5d7; display:block; float:left; width: 100%;">
+        <img style=" float: left;
+        -webkit-border-radius: 5px;
+         border-radius: 5px; border: solid 3px white; height: 120px; width: 120px;" src="{{ infouser.profile_image_url }}" />
+            <ul style="float: left;list-style: none; display: inline-block; width:80%; margin:0; padding: 0; border-bottom:solid 2px grey; text-align: center">
+                <li style="display: inline-block; padding-top: 15px; padding-bottom: 15px; margin: auto;"> Followers: {{ infouser.followers_count }}</li>
+                <li style="display: inline-block; padding-top: 15px; padding-bottom: 15px;"> Following: {{ infouser.friends_count }}</li>
+                <li style="display: inline-block; padding-top: 15px; padding-bottom: 15px;" > Favorites: {{ infouser.favourites_count }}</li>
+            </ul>
+            <a style="padding:10px; background-color: indianred; border-radius: 5px; border: 2px solid red; cursor: pointer; float: right; display: inline-block; margin-top: 10px; margin-right: 10px;" data="{{infouser.screen_name}}" onclick="deletefavorite(this,'myTwits')" >Delete Favorite</a>
+            <h1 style="margin-bottom: 0;">{{ infouser.name }}</h1>
+            <h3 style="margin-top: 0">{{ infouser.screen_name }}</h3>
+        <p>{{ infouser.description }}</p>
+    </div>
+</div>
+{% if tweets %}
+    <ul id="twits_list" class="show-tweets">
+    {% for tweet in tweets %}
+        <li class="tweet_display">
+            <div style="">
+                <h1 >{{ tweet.user_name }}</h1>
+            </div>
+            <h2>{{ tweet.screen_name }}</h2>
+            <h3>{{ tweet.text }}</h3>
+            {% if tweet.media %}
+                Media Type: {{ tweet.media.type }} url: {{ tweet.media.url }}
+            {% endif %}
+            <a style="color:red; cursor: pointer;" tweet="{{ tweet.tweet_str_id }}" onclick="deletetweet(this,'myTwits')"> Delete Tweet</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <div>
+        <h3 style="color: aliceblue">{{ user }}, you doesn't have saved tweets </h3>
+    </div>
+{% endif %}

@@ -1,12 +1,11 @@
 from django.shortcuts import render, get_object_or_404, render_to_response
 from models import *
 from forms import *
-from django.template import Context, RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.admin.views.decorators import staff_member_required
 from Twitter import *
+import ast
 # API imports
 # from serializers import *
 from rest_framework import generics
@@ -15,6 +14,7 @@ from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 from rest_framework_xml.renderers import XMLRenderer
+
 
 def base_html(request):
     return render(request, 'base.html', {})
@@ -27,12 +27,13 @@ def welcome_view(request):
     else:
         return render(request, 'index.html', {'sign_up_form': form,})
 
-
+@login_required
 def index(request):
     form = UserForm()
     return render(request, 'mainpage.html', {
         'search_form': form
     })
+
 
 def register(request):
     if request.method == 'POST':
@@ -101,5 +102,152 @@ def user_profile(request, username):
                                          'user_form': UserProfileForm()})
 
 @login_required
-def editprofile(request):
+def edit_profile(request):
     return render(request,'editprofile.html',{'user_info': request.user.userprofile})
+
+@login_required
+def get_tweets_view(request):
+    auth = get_oauth()
+    topics = get_trendy_topics(auth)
+    trendy_topics = select_trendy_topics(topics)
+    saved_tweets = Tweet.objects.filter(usr=request.user).values_list('tweet_str_id', flat=True)
+    return render(request, 'view_tweets.html', {'saved_tweets':saved_tweets,
+                                                'trendy_topics': trendy_topics})
+
+@login_required
+def add_favorite(request):
+    if request.method == 'GET':
+        favorite = request.GET.get('screenname')
+        entry = Favorites(usr=request.user, name=favorite)
+        entry.save()
+        return HttpResponse("Delete Favorite")
+    return HttpResponse('<h1>Adding tweet bad method<h1>')
+
+@login_required
+def delete_favorite(request):
+    if request.method == 'GET':
+        favorite = request.GET.get('screenname')
+        type = request.GET.get('type')
+        entry = Favorites.objects.filter(name=favorite)
+        try:
+            entry.delete()
+        except:
+            print "Delete error", sys.exc_info()
+            raise
+        if type == 'search':
+            return HttpResponse("Add Favorite")
+        else:
+            return HttpResponse("deleted")
+    return HttpResponse('<h1>Delete favorite bad method<h1>')
+
+@login_required
+def save_tweet(request):
+    if request.method == 'GET':
+        data = request.GET.get('tweet')
+        item = ast.literal_eval(data)
+        tweet_id = unicode(item[u'twit_id'])
+        user_id = unicode(item[u'user_id'])
+        name = unicode(item[u'name'])
+        screen_name = unicode(item[u'screen_name'])
+        time = unicode(item[u'time'])
+        favorites = unicode(item[u'favorites'])
+        retweets = unicode(item[u'retweets'])
+        text = unicode(item[u'text'])
+        try:
+            entry = Tweet(usr=request.user, tweet_str_id=tweet_id, user_name=name, user_tweet_id=user_id,
+                          favorites_count=int(favorites), retweets_count=int(retweets), time=time,
+                          screen_name=screen_name, text= text)
+        except:
+            print "Error making entry", sys.exc_info()
+            raise
+        try:
+            entry.save()
+        except:
+            print "Saving Error", sys.exc_info()
+            raise
+        response = HttpResponse()
+        response.write("Delete Tweet")
+        return response
+    return HttpResponse("<h1>Save tweet bad method<h1>")
+
+@login_required
+def delete_tweet(request):
+    if request.method == 'GET':
+        data = request.GET.get('tweet')
+        type = request.GET.get('type')
+        if type == "myTwits":
+            tweet_id = data
+        else:
+            item = ast.literal_eval(data)
+            t_id = unicode(item[u'twit_id'])
+            tweet_id = str(t_id)
+        entry = Tweet.objects.filter(usr=request.user).filter(tweet_str_id=tweet_id)
+        try:
+            entry.delete()
+        except:
+            print "Deleting Error", sys.exc_info()
+            raise
+        return HttpResponse("Save tweet")
+    return HttpResponse('<h1>Delete tweet bad method<h1>')
+
+@login_required
+def search_twits(request):
+    auth = get_oauth()
+    saved_tweets = Tweet.objects.filter(usr=request.user).values_list('tweet_str_id', flat=True)
+    if request.method == 'GET':
+        if request.GET.has_key('query'):
+            query = request.GET.get('query')
+            count = request.GET.get('count')
+            data = get_tweets_search(auth,query,count)
+            r = select_search_tweets(data)
+            tweets = show_tweets(r)
+            if tweets:
+                return render(request, 'search_twits.html', {'tweets': tweets,
+                                                            'saved_tweets': saved_tweets})
+            else:
+                return render(request, 'search_twits.html', {'errors': {'type': "search", 'data': query}})
+        else:
+            screen_user = request.GET.get('screen_user')
+            count = request.GET.get('count')
+            r = get_tweets(auth, screen_user, count)
+            data = load_json_object(r)
+            tweets = show_tweets(data)
+            if tweets:
+                return render(request, 'search_twits.html', {'tweets': tweets,
+                                                            'saved_tweets': saved_tweets})
+            else:
+                return render(request, 'search_twits.html', {'errors': {'type': "user", 'data': screen_user}})
+    return HttpResponse("<h1>Search tweet bad method<h1>")
+
+@login_required
+def user_twitter_view(request):
+    if request.method == 'GET':
+        auth = get_oauth()
+        name = request.GET.get('data')
+        r = get_user_information(auth, name)
+        data = load_json_object(r)
+        info_user = make_user_information(data)
+        favorites = Favorites.objects.filter(usr=request.user).values_list('name', flat=True)
+        return render(request, 'twitterUser_info.html', {'screen_user': name,
+                                                 'infouser': info_user,
+                                                 'favorites': favorites})
+    return HttpResponse("<h1>Ger user Twitter bad method<h1>")
+
+@login_required
+def favorite_user_twits(request):
+    if request.method == 'GET':
+        auth = get_oauth()
+        name = request.GET.get('data')
+        r = get_user_information(auth, name)
+        data = load_json_object(r)
+        info_user = make_user_information(data)
+        tweets = Tweet.objects.filter(usr=request.user).filter(screen_name=info_user['screen_name'])
+        return render(request, 'favorite_user_twits.html', {'infouser': info_user,
+                                                            'tweets':tweets})
+
+@login_required
+def saved_twits(request):
+    saved_tweets = Tweet.objects.filter(usr=request.user)
+    favorites = Favorites.objects.filter(usr=request.user).values_list('name', flat=True)
+    return render(request, 'saved_twits.html', {'tweets': saved_tweets,
+                                                'favorites': favorites})

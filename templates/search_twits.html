@@ -1,0 +1,37 @@
+ {% if tweets %}
+        <div class = "twits-manage">
+            <h1 style="margin-left: 20px"><a href="#">{{ user_searched }}</a></h1>
+            <span style="float: right; margin-right: 15px; ">
+                <input type="text" id="input_prova" onkeyup="search(this,'h3', 'list')" placeholder="Search" />
+            </span>
+        </div>
+        <ul id="list" class="show-tweets">
+        {% for tweet in tweets %}
+            <li class="tweet_display">
+                <div style="">
+                    <span style="display: inline-block; cursor: pointer;"><h1 data="{{ tweet.screen_name }}" onclick="ajaxPetition(this)">{{ tweet.name }}</h1></span>
+                </div>
+                <h2>{{ tweet.screen_name }}</h2>
+                <h3>{{ tweet.text }}</h3>
+                {% if tweet.media %}
+                    Media Type: {{ tweet.media.type }} url: {{ tweet.media.url }}
+                {% endif %}
+                {% if tweet.twit_id in saved_tweets %}
+                    <a style="color:red; cursor: pointer;" tweet="{{ tweet }}" onclick="deletetweet(this,'search')"> Delete Tweet</a>
+                {% else %}
+                    <a style="color:green; cursor:pointer;" tweet="{{ tweet }}" onclick="savetweet(this)" >Save Tweet</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+{% elif errors %}
+    {% if errors.type == "user" %}
+        <div>
+            <h3 style="color: aliceblue">User <span style="color: red">{{ errors.data }}</span> does not exist or is a Private account.</h3>
+        </div>
+    {% else %}
+        <div>
+            <h3 style="color: aliceblue">No twits found in search: <span style="color: red">{{ errors.data }}</span></h3>
+        </div>
+    {% endif %}
+{% endif %}

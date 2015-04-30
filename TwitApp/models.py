@@ -3,7 +3,7 @@ from django.db import models
 from django.db.models.signals import post_save
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User)
+    usr = models.OneToOneField(User)
     twitter_id = models.CharField(max_length=20, blank=True)
     website = models.URLField(blank=True)
     country = models.CharField(max_length=30, blank=True)
@@ -11,23 +11,23 @@ class UserProfile(models.Model):
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
     def __unicode__(self):
-        return self.user.username
+        return self.usr.username
 
 def create_user_profile(sender, instance, created,**kwargs):
     if created:
-        UserProfile.objects.create(user=instance)
+        UserProfile.objects.create(usr=instance)
 
 post_save.connect(create_user_profile, sender=User)
 
 class Favorites(models.Model):
-    user = models.ForeignKey(User)
+    usr = models.ForeignKey(User)
     name = models.CharField(max_length=30, unique = True)
 
     def __unicode__(self):
         return '%s' % self.name
 
 class Tweet(models.Model):
-    user = models.ForeignKey(User)
+    usr = models.ForeignKey(User)
     tweet_str_id = models.CharField(max_length = 100, unique = True)
     screen_name = models.CharField(max_length = 100)
     user_name = models.CharField(max_length = 100)
