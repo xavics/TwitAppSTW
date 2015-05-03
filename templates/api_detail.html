@@ -1,0 +1,12 @@
+{% for element in data.items %}
+    {{ element.0 }}:
+    {% if element.1|wordcount > 1 and element.0 != 'text' and element.0 != 'time' and element.0 != 'user_name' %}
+        <ul style="list-style: none;">
+            {% for item in element.1 %}
+                <li>{{ item }}<br></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        {{element.1}}<br>
+    {% endif %}
+{% endfor %}

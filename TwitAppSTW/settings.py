@@ -60,7 +60,6 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
         'rest_framework.renderers.JSONRenderer',
         'rest_framework_xml.renderers.XMLRenderer',
-        'rest_framework.renderers.TemplateHTMLRenderer'
     )
 }
 
@@ -84,7 +83,7 @@ AUTH_PROFILE_MODULE = 'TwitApp.UserProfile'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'TwitAppDB',
     }
 }
 

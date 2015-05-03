@@ -1,0 +1,22 @@
+{% for object in data.items  %}
+    {% if object.1|wordcount > 1%}
+        {% for elements in object.1 %}
+            <ul style="list-style: none;">
+            {% for element in elements.items %}
+                <li>{{ element.0 }}:
+                {% if element.0 == 'tweet' or element.0 == 'favorite' %}
+                    <ul style="list-style: none;">
+                        {% for item in element.1 %}
+                            <li>{{ item }}<br></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    {{element.1}}<br></li>
+                {% endif %}
+            {% endfor %}
+            </ul><br>
+        {% endfor %}
+    {% else %}
+        {{ object.0 }}: {{ object.1 }}<br>
+    {% endif %}
+{% endfor %}

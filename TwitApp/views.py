@@ -1,17 +1,21 @@
-from django.shortcuts import render, get_object_or_404, render_to_response
-from models import *
-from forms import *
+import ast
+import sys
+
+from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer, BrowsableAPIRenderer
+from rest_framework_xml.renderers import XMLRenderer
+from django.template import RequestContext
+
+from forms import *
 from Twitter import *
-import ast
+
 # API imports
 from serializers import *
 from rest_framework import generics
-from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
-from rest_framework.response import Response
 
 
 def base_html(request):
@@ -250,39 +254,66 @@ def saved_twits(request):
     return render(request, 'saved_twits.html', {'tweets': saved_tweets,
                                                 'favorites': favorites})
 
+class CustomTemplateHTMLRenderer(TemplateHTMLRenderer):
+
+    def resolve_context(self, data, request, response):
+        if response.exception:
+            data['status_code'] = response.status_code
+        data = {'data': data}
+        return RequestContext(request, data)
+
 
 class APIUserList(generics.ListCreateAPIView):
-    queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializer
-    template_name = 'api_user_list.html'
+    queryset = User.objects.all()
+    serializer_class = UserSerialize
+    template_name = 'api_list.html'
+    renderer_classes = (BrowsableAPIRenderer,CustomTemplateHTMLRenderer,JSONRenderer,XMLRenderer)
 
 
 class APIUserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerialize
+    template_name = 'api_detail.html'
+    renderer_classes = (BrowsableAPIRenderer,CustomTemplateHTMLRenderer,JSONRenderer,XMLRenderer)
+
+
+class APIUserProfileList(generics.ListCreateAPIView):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
-    template_name = 'api_user_detail.html'
+    renderer_classes = (BrowsableAPIRenderer,CustomTemplateHTMLRenderer,JSONRenderer,XMLRenderer)
+    template_name = 'api_list.html'
+
+
+class APIUserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+    renderer_classes = (BrowsableAPIRenderer,CustomTemplateHTMLRenderer,JSONRenderer,XMLRenderer)
+    template_name = 'api_detail.html'
 
 
 class APITweetList(generics.ListCreateAPIView):
     queryset = Tweet.objects.all()
     serializer_class = TweetSerializer
-    template_name = 'api_template_list.html'
+    renderer_classes = (BrowsableAPIRenderer,CustomTemplateHTMLRenderer,JSONRenderer,XMLRenderer)
+    template_name = 'api_list.html'
 
 
 class APITweetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Tweet.objects.all()
     serializer_class = TweetSerializer
-    context_object_name = 'llista'
-    template_name = 'api_tweet_detail.html'
+    renderer_classes = (BrowsableAPIRenderer,CustomTemplateHTMLRenderer,JSONRenderer,XMLRenderer)
+    template_name = 'api_detail.html'
 
 
 class APIFavoriteList(generics.ListCreateAPIView):
     queryset = Favorites.objects.all()
     serializer_class = FavoritesSerializer
-    template_name = 'api_template_list.html'
+    renderer_classes = (BrowsableAPIRenderer,CustomTemplateHTMLRenderer,JSONRenderer,XMLRenderer)
+    template_name = 'api_list.html'
 
 
 class APIFavoriteDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Favorites.objects.all()
     serializer_class = FavoritesSerializer
-    template_name = 'api_favorite_detail.html'
+    renderer_classes = (BrowsableAPIRenderer,CustomTemplateHTMLRenderer,JSONRenderer,XMLRenderer)
+    template_name = 'api_detail.html'

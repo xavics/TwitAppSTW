@@ -4,7 +4,7 @@
         <h1 class="welcome-h1">Welcome to TweetApp</h1>
         <div class="first_container">
             <div>
-                <span>If you are new...</span>
+                <span>Log in</span>
                 <form id="user_form" class="log-form" method="post" action="register.html" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="text" name="username" placeholder="User" required /><br><br>
@@ -13,7 +13,7 @@
                 </form>
             </div>
             <div>
-                <span>Benvingut</span>
+                <span>New to TwitApp?</span>
                 <form id="reg_form" class="log-form" method="post" action="login.html" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="text" name="username" placeholder="User" required /><br><br>

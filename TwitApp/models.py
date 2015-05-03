@@ -20,14 +20,14 @@ def create_user_profile(sender, instance, created,**kwargs):
 post_save.connect(create_user_profile, sender=User)
 
 class Favorites(models.Model):
-    usr = models.ForeignKey(User)
+    usr = models.ForeignKey(User, related_name='favorite')
     name = models.CharField(max_length=30, unique = True)
 
     def __unicode__(self):
         return '%s' % self.name
 
 class Tweet(models.Model):
-    usr = models.ForeignKey(User)
+    usr = models.ForeignKey(User, related_name='tweet')
     tweet_str_id = models.CharField(max_length = 100, unique = True)
     screen_name = models.CharField(max_length = 100)
     user_name = models.CharField(max_length = 100)

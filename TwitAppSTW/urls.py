@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
-from TwitApp.views import APIUserList, APIUserDetail, APITweetList, APITweetDetail, APIFavoriteDetail, APIFavoriteList
+from TwitApp.views import APIUserList, APIUserDetail, APITweetList, APITweetDetail, APIFavoriteDetail, APIFavoriteList, APIUserProfileDetail, APIUserProfileList
 from rest_framework.urlpatterns import format_suffix_patterns
 admin.autodiscover()
 
@@ -31,6 +31,8 @@ urlpatterns = patterns('',
     #API Rest
     url(r'^api/users/$',APIUserList.as_view(),name='user-list'),
     url(r'^api/users/(?P<pk>\d+)/$',APIUserDetail.as_view(),name='user-detail'),
+    url(r'^api/userProfiles/$',APIUserProfileList.as_view(),name='userProfile-list'),
+    url(r'^api/userProfiles/(?P<pk>\d+)/$',APIUserProfileDetail.as_view(),name='userProfile-detail'),
     url(r'^api/tweets/$',APITweetList.as_view(),name='tweet-list'),
     url(r'^api/tweets/(?P<pk>\d+)/$',APITweetDetail.as_view(),name='tweet-detail'),
     url(r'^api/favorites/$',APIFavoriteList.as_view(),name='favorite-list'),
