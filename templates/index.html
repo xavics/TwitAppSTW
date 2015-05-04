@@ -5,7 +5,7 @@
         <div class="first_container">
             <div>
                 <span>Log in</span>
-                <form id="user_form" class="log-form" method="post" action="register.html" enctype="multipart/form-data">
+                <form id="user_form" class="log-form" method="post" action="login.html" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="text" name="username" placeholder="User" required /><br><br>
                     <input type="password" name="password" placeholder="Password" required /><br><br>
@@ -14,7 +14,7 @@
             </div>
             <div>
                 <span>New to TwitApp?</span>
-                <form id="reg_form" class="log-form" method="post" action="login.html" enctype="multipart/form-data">
+                <form id="reg_form" class="log-form" method="post" action="register.html" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="text" name="username" placeholder="User" required /><br><br>
                     <input type="password" name="password" placeholder="Password" required /><br><br>
