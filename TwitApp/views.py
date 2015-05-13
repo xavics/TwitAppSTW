@@ -116,8 +116,11 @@ def get_tweets_view(request):
     topics = get_trendy_topics(auth)
     trendy_topics = select_trendy_topics(topics)
     saved_tweets = Tweet.objects.filter(usr=request.user).values_list('tweet_str_id', flat=True)
+    favorites_user = Favorites.objects.filter(usr=request.user).values_list('name', flat=True)
+    print favorites_user
     return render(request, 'view_tweets.html', {'saved_tweets':saved_tweets,
-                                                'trendy_topics': trendy_topics})
+                                                'trendy_topics': trendy_topics,
+                                                'favorites_user': favorites_user})
 
 @login_required
 def add_favorite(request):
