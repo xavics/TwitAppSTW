@@ -4,21 +4,21 @@ function submitform(){
 }
 
 function loaduser(){
-    $('#firstname').load(' #firstname');
-    $('#lastname').load(' #lastname');
+    $('#buttons_profile').load(' #buttons_profile');
+    $('#name').load(' #name');
     $('#email').load(' #email');
     $('#twitterid').load(' #twitterid');
     $('#website').load(' #website');
-    $('#spana').load(' #spana')
+    $('#location').load(' #location');
 }
 
 function loadedit(){
-    $('#firstname').load('/edit #firstname');
-    $('#lastname').load('/edit #lastname');
+    $('#buttons_profile').load('/edit #buttons_profile');
+    $('#name').load('/edit #name');
     $('#email').load('/edit #email');
     $('#twitterid').load('/edit #twitterid');
     $('#website').load('/edit #website');
-    $('#spana').load('/edit #spana')
+    $('#location').load('/edit #location');
 }
 
 function search(input, tag, id) {
@@ -198,4 +198,41 @@ function removeHtml(input){
 function radioSwitch(change){
     var radio = document.getElementById(change);
     radio.checked = false;
+}
+
+function reload_autocomplete() {
+    $(function () {
+        $("#location_auto").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "http://ws.geonames.org/searchJSON",
+                    dataType: "jsonp",
+                    data: {
+                        featureClass: "P",
+                        maxRows: 10,
+                        name_startsWith: request.term,
+                        username: "fnicu"
+                    },
+                    success: function (data) {
+                        response($.map(data.geonames, function (item) {
+                            return {
+                                label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+                                value: item.name,
+                                stateOrProvince: item.adminName1,
+                                countryName: item.countryName
+                            }
+                        }));
+                    }
+                });
+            },
+            minLength: 2,
+            select: function (event, ui) {
+                if (ui.item) {
+                    $("#id_stateOrProvince").val(ui.item.stateOrProvince);
+                    $("#id_country").val(ui.item.countryName);
+                    $("#id_zipCode").val("");
+                }
+            }
+        });
+    });
 }

@@ -85,6 +85,7 @@ def user_profile(request, username):
         last_name = request.POST.get('last_name')
         email = request.POST.get('email')
         website = request.POST.get('website')
+        location = request.POST.get('location')
         userProfile = request.user.userprofile
         userdata = request.user
         if first_name != "":
@@ -97,6 +98,8 @@ def user_profile(request, username):
             userProfile.twitter_id = twitter_id
         if website != "":
             userProfile.website = website
+        if location != "":
+            userProfile.location = location
         userProfile.save()
         userdata.save()
         return render(request, 'user.html', {'user_info': request.user.userprofile})
@@ -113,8 +116,11 @@ def get_tweets_view(request):
     topics = get_trendy_topics(auth)
     trendy_topics = select_trendy_topics(topics)
     saved_tweets = Tweet.objects.filter(usr=request.user).values_list('tweet_str_id', flat=True)
+    favorites_user = Favorites.objects.filter(usr=request.user).values_list('name', flat=True)
+    print favorites_user
     return render(request, 'view_tweets.html', {'saved_tweets':saved_tweets,
-                                                'trendy_topics': trendy_topics})
+                                                'trendy_topics': trendy_topics,
+                                                'favorites_user': favorites_user})
 
 @login_required
 def add_favorite(request):

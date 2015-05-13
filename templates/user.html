@@ -14,35 +14,34 @@
                     <span style="position: relative; float: left"><h1>{{ user }}</h1></span>
             </div>
             <div id="buttons" class="user-buttons" >
-                <span id="spana"><a id="editprofile" onclick="loadedit()" >Edit Profile</a></span>
+                <span id="buttons_profile"><a id="editprofile" onclick="loadedit()" >Edit Profile</a></span>
             </div>
         </div>
         <form id="infoform" action="" method="post">
             {% csrf_token %}
             <div style="width: 100%" >
-                <h1>Name:</h1>
-                <span id="firstname" style="display: inline-block"><h2>{{ user.first_name }}</h2></span>
-                <span id="lastname" style="display: inline-block"><h2>{{ user.last_name }}</h2></span>
+                <h1>Name</h1>
+                    <span id="name"><h2>{{ user.first_name }} {{ user.last_name }}</h2></span>
                 <hr>
             </div>
             <div style="width: 100%" >
-                <h1>Mail:</h1>
+                <h1>Mail</h1>
                 <span id="email"><h2>{{ user.email }}</h2></span>
                 <hr>
             </div>
             <div style="width: 100%" >
-                <h1>Twitter username:</h1>
+                <h1>Twitter username</h1>
                 <span id="twitterid"><h2>{{ user_info.twitter_id }}</h2></span>
                 <hr>
             </div>
             <div style="width: 100%" >
-                <h1>Website:</h1>
+                <h1>Website</h1>
                 <span id="website"><h2>{{ user_info.website }}</h2></span>
                 <hr>
             </div>
             <div style="width: 100%" >
-                <h1>Country:</h1>
-                <span id="country"><h2>{{ user_info.country }}</h2></span>
+                <h1>Location</h1>
+                <span id="location"><h2>{{ user_info.location }}</h2></span>
                 <hr>
             </div>
         </form>
