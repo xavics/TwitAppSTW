@@ -2,7 +2,7 @@
 
 {% block content %}
      <div id="buttons" class="user-buttons">
-        <span id="spana">
+        <span id="buttons_profile">
             <ul>
                 <li><a id="save" onclick="submitform()" >Save changes</a></li>
                 <li><a id="cancel" onclick="loaduser()" >Cancel</a></li>
@@ -10,16 +10,18 @@
         </span>
      </div>
     <form id="infoform" action="" method="post">
-    {% if user.first_name %}
-        <span id="firstname"><input name="first_name" type="text" placeholder="{{ user.first_name }}" /></span>
-    {% else %}
-        <span id="firstname"><input name="first_name" type="text" placeholder="First name" /></span>
-    {% endif %}
-    {% if user.last_name %}
-        <span id="lastname"><input name="last_name" type="text" placeholder="{{ user.last_name }}" /></span>
-    {% else %}
-        <span id="lastname"><input name="last_name" type="text" placeholder="Last name" /></span>
-    {% endif %}
+    <span id="name">
+        {% if user.first_name %}
+            <input name="first_name" type="text" placeholder="{{ user.first_name }}" />
+        {% else %}
+            <input name="first_name" type="text" placeholder="First name" />
+        {% endif %}
+        {% if user.last_name %}
+            <input name="last_name" type="text" placeholder="{{ user.last_name }}" />
+        {% else %}
+            <input name="last_name" type="text" placeholder="Last name" />
+        {% endif %}
+    </span>
     {% if user.email %}
         <span id="email"><input name="email" type="text" placeholder="{{ user.email }}" /></span>
     {% else %}
@@ -35,6 +37,10 @@
     {% else %}
         <span id="website"><input name="website" type="text" placeholder="website" /></span>
     {% endif %}
-        <span id="country"><input name="country" type="text" placeholder="Country" /></span>
+    {% if user_info.location %}
+        <span id="location"><input id="location_auto" onfocus="reload_autocomplete()" name="location" type="text" placeholder="{{ user_info.location }}" /></span>
+    {% else %}
+        <span id="location"><input id="location_auto" onfocus="reload_autocomplete()" name="location" type="text" placeholder="location" /></span>
+    {% endif %}
     </form>
 {% endblock %}

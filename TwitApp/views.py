@@ -85,6 +85,7 @@ def user_profile(request, username):
         last_name = request.POST.get('last_name')
         email = request.POST.get('email')
         website = request.POST.get('website')
+        location = request.POST.get('location')
         userProfile = request.user.userprofile
         userdata = request.user
         if first_name != "":
@@ -97,6 +98,8 @@ def user_profile(request, username):
             userProfile.twitter_id = twitter_id
         if website != "":
             userProfile.website = website
+        if location != "":
+            userProfile.location = location
         userProfile.save()
         userdata.save()
         return render(request, 'user.html', {'user_info': request.user.userprofile})

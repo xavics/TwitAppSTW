@@ -1,11 +1,11 @@
 body{
-    background-color: RGB(32,32,32);
+    background-color: RGB(72,72,72);
     /*background-image: url("pictures/pattern.png");*/
     margin: 0px auto;
 }
 
 .navigation {
-    background-color: antiquewhite;
+    background-color: black;
     display: block;
     width: 100%;
     height: 45px;
@@ -57,11 +57,11 @@ body{
     overflow: hidden;
     text-decoration: none;
     text-align: center;
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: black;
 }
 
-.navigation ul li a:hover{ background-color: aqua;}
+.navigation ul li a:hover{ background-color: RGB(51,102,184);}
 .navigation ul li:hover ul{
     display:block;
 }
@@ -85,8 +85,8 @@ body{
     position: relative;
     cursor: pointer;
     text-decoration: none;
-    color: red;
-    background-color: white;
+    color: white;
+    background-color: black;
     display: block;
 }
 
@@ -392,10 +392,10 @@ body{
     font-family: Arial;
 }
 .center-twit-display ul li h2{
-    color: grey;
+    color: white;
     margin-top: 0%;
     text-align: left;
-    font-size: 10px;
+    font-size: 15px;
     font-weight: bold;
     font-family: Arial;
 }
@@ -422,7 +422,7 @@ body{
     width: 54%;
     position: relative;
     display: block;
-    background-color: lightblue;
+    background-color: rgba(51,204,255,0.7);
     padding: 3% 3%;
 }
 
@@ -436,6 +436,22 @@ body{
     opacity: 0.5;
 }
 
+.user-div h1{
+    font-family: fantasy;
+    font-weight: bold;
+}
+
+.user-div h2{
+    font-family: fantasy;
+    color: aqua;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.user-div hr{
+    color: white;
+    margin: 0px;
+}
 
 .user-buttons{
     position: relative;

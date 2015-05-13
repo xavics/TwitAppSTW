@@ -15,6 +15,21 @@
     <div class="center-twit-display">
         <div style="text-align: center;">
             <input id="search_input" type="text" name="screen_user" placeholder="User" required />
+            <script>
+                var llista = []
+                $(function() {
+                    $.getJSON("/api/users/{{ user.id }}/.json", {}, function (data) {
+                        for (i=0; i< data['favorite'].length; i++){
+                            $.getJSON(data['favorite'][i], {}, function (favorite) {
+                                    llista.push(favorite['name']);
+                            });
+                        }
+                    });
+                });
+                $("#search_input").autocomplete({
+                        source: llista
+                });
+            </script>
             <a class="special-input" inputsubmit="search_input" onclick="searchTrendy(this,'#loading','search_count','radio_user')" >Search</a>
             <img id="loading" style="display:none; height: 20px; width: 20px;" src="{{MEDIA_URL}}donut.gif" />
         </div>
