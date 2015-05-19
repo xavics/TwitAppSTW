@@ -16,7 +16,7 @@
         <div style="text-align: center;">
             <input id="search_input" type="text" name="screen_user" placeholder="User" required />
             <script>
-                var llista = []
+                var llista = [];
                 $(function() {
                     $.getJSON("/api/users/{{ user.id }}/.json", {}, function (data) {
                         for (i=0; i< data['favorite'].length; i++){

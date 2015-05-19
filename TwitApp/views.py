@@ -15,7 +15,9 @@ from Twitter import *
 # API imports
 from serializers import *
 from rest_framework import generics
+from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
+from rest_framework.response import Response
 
 
 def base_html(request):
@@ -267,6 +269,16 @@ class CustomTemplateHTMLRenderer(TemplateHTMLRenderer):
             data['status_code'] = response.status_code
         data = {'data': data}
         return RequestContext(request, data)
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    """
+    The entry endpoint of our API
+    """
+    return Response({
+        'users': reverse('user-list', request=request),
+        'tweets': reverse('tweet-list', request=request),
+    })
 
 
 class APIUserList(generics.ListCreateAPIView):

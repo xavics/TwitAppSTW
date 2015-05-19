@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     #Media
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.BASE_DIR+'/TwitApp'+settings.MEDIA_URL}),
     #API Rest
+    url(r'^api/$','TwitApp.views.api_root',name='api-root'),
     url(r'^api/users/$',APIUserList.as_view(),name='user-list'),
     url(r'^api/users/(?P<pk>\d+)/$',APIUserDetail.as_view(),name='user-detail'),
     url(r'^api/userProfiles/$',APIUserProfileList.as_view(),name='userProfile-list'),
