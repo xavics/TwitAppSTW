@@ -9,7 +9,12 @@ function loaduser(){
     $('#email').load(' #email');
     $('#twitterid').load(' #twitterid');
     $('#website').load(' #website');
+    $('#country').load(' #country');
+    $('#map').load(' #map');
+    $('#region').load(' #region');
     $('#location').load(' #location');
+    $('#street').load(' #street');
+    $('#postalCode').load(' #postalCode');
 }
 
 function loadedit(){
@@ -18,7 +23,11 @@ function loadedit(){
     $('#email').load('/edit #email');
     $('#twitterid').load('/edit #twitterid');
     $('#website').load('/edit #website');
+    $('#country').load('/edit #country');
+    $('#region').load('/edit #region');
     $('#location').load('/edit #location');
+    $('#street').load('/edit #street');
+    $('#postalCode').load('/edit #postalCode');
 }
 
 function search(input, tag, id) {

@@ -87,7 +87,11 @@ def user_profile(request, username):
         last_name = request.POST.get('last_name')
         email = request.POST.get('email')
         website = request.POST.get('website')
+        country = request.POST.get('country')
+        region = request.POST.get('region')
         location = request.POST.get('location')
+        street = request.POST.get('street')
+        postalCode = request.POST.get('postalCode')
         userProfile = request.user.userprofile
         userdata = request.user
         if first_name != "":
@@ -100,8 +104,17 @@ def user_profile(request, username):
             userProfile.twitter_id = twitter_id
         if website != "":
             userProfile.website = website
+        if country != "":
+            userProfile.country = country
+            userProfile.map = "http://www.google.es/maps/place/" + country
+        if region != "":
+            userProfile.region = region
         if location != "":
             userProfile.location = location
+        if street != "":
+            userProfile.street = street
+        if postalCode != "":
+            userProfile.postalCode = postalCode
         userProfile.save()
         userdata.save()
         return render(request, 'user.html', {'user_info': request.user.userprofile})

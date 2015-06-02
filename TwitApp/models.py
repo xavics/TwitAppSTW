@@ -6,9 +6,13 @@ class UserProfile(models.Model):
     usr = models.OneToOneField(User)
     twitter_id = models.CharField(max_length=20, blank=True)
     website = models.URLField(blank=True)
+    country = models.CharField(max_length=100, blank=True)
+    region = models.CharField(max_length=30, blank=True)
     location = models.CharField(max_length=100, blank=True)
-    city = models.CharField(max_length=30, blank=True)
+    street = models.CharField(max_length=70, blank=True)
+    postalCode = models.CharField(max_length=10, blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
+    map = models.CharField(max_length=500, blank=True)
 
     def __unicode__(self):
         return self.usr.username

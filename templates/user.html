@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-</div>
+
 {% block content %}
     <div id="userbody" class="user-div">
         <div style="width: 100%; height: auto; padding: 10px; margin-bottom: 25px; overflow: hidden;">
@@ -17,33 +17,65 @@
                 <span id="buttons_profile"><a id="editprofile" onclick="loadedit()" >Edit Profile</a></span>
             </div>
         </div>
-        <form id="infoform" action="" method="post">
-            {% csrf_token %}
-            <div style="width: 100%" >
-                <h1>Name</h1>
-                    <span id="name"><h2>{{ user.first_name }} {{ user.last_name }}</h2></span>
-                <hr>
-            </div>
-            <div style="width: 100%" >
-                <h1>Mail</h1>
-                <span id="email"><h2>{{ user.email }}</h2></span>
-                <hr>
-            </div>
-            <div style="width: 100%" >
-                <h1>Twitter username</h1>
-                <span id="twitterid"><h2>{{ user_info.twitter_id }}</h2></span>
-                <hr>
-            </div>
-            <div style="width: 100%" >
-                <h1>Website</h1>
-                <span id="website"><h2><a href="{{ user_info.website }}" >{{ user_info.website }}</a></h2></span>
-                <hr>
-            </div>
-            <div style="width: 100%" >
-                <h1>Location</h1>
-                <span id="location"><h2>{{ user_info.location }}</h2></span>
-                <hr>
-            </div>
+        <form id="infoform" action="" method="post" vocab="http://schema.org/" typeof="Person">
+            <span>
+                {% csrf_token %}
+                <div style="width: 100%" >
+                    <h1>Name</h1>
+                        <span id="name" property="name"><h2>{{ user.first_name }} {{ user.last_name }}</h2></span>
+                    <hr>
+                </div>
+                <div style="width: 100%" >
+                    <h1>Mail</h1>
+                    <span id="email" property="email"><h2>{{ user.email }}</h2></span>
+                    <hr>
+                </div>
+                <div style="width: 100%" >
+                    <h1>Twitter username</h1>
+                    <span id="twitterid" property="additionalName"><h2>{{ user_info.twitter_id }}</h2></span>
+                    <hr>
+                </div>
+                <div style="width: 100%" >
+                    <h1>Website</h1>
+                    <span id="website" property="url"><h2><a href="{{ user_info.website }}" >{{ user_info.website }}</a></h2></span>
+                    <hr>
+                </div>
+                <div property="address" typeof="PostalAddress">
+                    <span rel="addressCountry" typeof="Country">
+                        <div style="width: 100%" >
+                            <h1>Country</h1>
+                            <span id="country" property="name"><h2>{{ user_info.country }}</h2></span>
+                            <hr>
+                        </div>
+                        <div style="width: 100%" >
+                            <h1>Map</h1>
+                            <span id="map" property="hasMap"><h2><a href="{{ user_info.map }}" >{{ user_info.map }}</a></h2></span>
+                            <hr>
+                        </div>
+                    </span>
+                    <div style="width: 100%" >
+                        <h1>Province</h1>
+                        <span id="region" property="addressRegion"><h2>{{ user_info.region }}</h2></span>
+                        <hr>
+                    </div>
+                    <div style="width: 100%" >
+                        <h1>Location</h1>
+                        <span id="location" property="addressLocality"><h2>{{ user_info.location }}</h2></span>
+                        <hr>
+                    </div>
+                    <div style="width: 100%" >
+                        <h1>Street</h1>
+                        <span id="street" property="streetAddress"><h2>{{ user_info.street }}</h2></span>
+                        <hr>
+                    </div>
+                    <div style="width: 100%" >
+                        <h1>Postal Code</h1>
+                        <span id="postalCode" property="postalCode"><h2>{{ user_info.postalCode }}</h2></span>
+                        <hr>
+                    </div>
+                </div>
+            </span>
+
         </form>
     </div>
 {% endblock %}

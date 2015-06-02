@@ -37,10 +37,30 @@
     {% else %}
         <span id="website"><input name="website" type="text" placeholder="website" /></span>
     {% endif %}
+    {% if user_info.country %}
+        <span id="country"><input name="country" type="text" placeholder="{{ user_info.country }}" /></span>
+    {% else %}
+        <span id="country"><input name="country" type="text" placeholder="country" /></span>
+    {% endif %}
+    {% if user_info.region %}
+        <span id="region"><input name="region" type="text" placeholder="{{ user_info.region }}" /></span>
+    {% else %}
+        <span id="region"><input name="region" type="text" placeholder="region" /></span>
+    {% endif %}
     {% if user_info.location %}
         <span id="location"><input id="location_auto" onfocus="reload_autocomplete()" name="location" type="text" placeholder="{{ user_info.location }}" /></span>
     {% else %}
         <span id="location"><input id="location_auto" onfocus="reload_autocomplete()" name="location" type="text" placeholder="location" /></span>
+    {% endif %}
+    {% if user_info.street %}
+        <span id="street"><input name="street" type="text" placeholder="{{ user_info.street }}" /></span>
+    {% else %}
+        <span id="street"><input name="street" type="text" placeholder="street" /></span>
+    {% endif %}
+    {% if user_info.postalCode %}
+        <span id="postalCode"><input name="postalCode" type="text" placeholder="{{ user_info.postalCode }}" /></span>
+    {% else %}
+        <span id="postalCode"><input name="postalCode" type="text" placeholder="postalCode" /></span>
     {% endif %}
     </form>
 {% endblock %}
