@@ -18,7 +18,7 @@ class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
     usr = HyperlinkedRelatedField(read_only=True, view_name='user-detail')
     class Meta:
         model = UserProfile
-        fields = ('url','usr','twitter_id','website')
+        fields = ('url','usr','twitter_id','website', 'country', 'region', 'location', 'map', 'street', 'postalCode')
 
 class TweetSerializer(serializers.HyperlinkedModelSerializer):
     url = HyperlinkedIdentityField(view_name='tweet-detail')
